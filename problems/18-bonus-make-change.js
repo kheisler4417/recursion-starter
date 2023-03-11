@@ -53,15 +53,53 @@ solution so that it only calculates and compares all of the different
 combinations.
 ***********************************************************************/
 
-function greedyMakeChange(target, coins = [25, 10, 5, 1]) {
-  // no tests for greedyMakeChange so make sure to test this on your own
-  // your code here
-}
+// Here's a solution for makeBetterChange:
 
-function makeBetterChange(target, coins = [25, 10, 5, 1]) {
-  // your code here
-}
+// function greedyMakeChange(amount, coins = [1, 5, 10, 25]) {
+//   if (amount === 0) {
+//     return [];
+//   }
 
+//   let coin = coins[0];
+//   if (coin > amount) {
+//     return greedyMakeChange(amount, coins.slice(1));
+//   } else {
+//     return [coin].concat(greedyMakeChange(amount - coin, coins));
+//   }
+// }
+
+// Here's a solution for greedyMakeChange:
+
+function makeBetterChange(amount, coins = [1, 5, 10, 25]) {
+  if (amount === 0) {
+    return [];
+  }
+
+  let bestChange = null;
+
+  for (let i = 0; i < coins.length; i++) {
+    let coin = coins[i];
+
+    if (coin > amount) {
+      continue;
+    }
+
+    let remainder = amount - coin;
+    let restChange = makeBetterChange(remainder, coins.slice(i));
+
+    if (restChange === null) {
+      continue;
+    }
+
+    let change = [coin].concat(restChange);
+
+    if (bestChange === null || change.length < bestChange.length) {
+      bestChange = change;
+    }
+  }
+
+  return bestChange;
+}
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {

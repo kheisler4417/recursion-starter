@@ -21,10 +21,26 @@ sort([0, 1, -3]); // [-3, 0, 1]
 sort([]); // []
 ***********************************************************************/
 
-function sort(nums, sorted = []) {
-  // your code here
-}
 
+function sort(nums, sorted = []) {
+  if (nums.length === 0) {
+    return sorted;
+  }
+
+  const min = Math.min(...nums);
+  sorted.push(min);
+  nums.splice(nums.indexOf(min), 1);
+
+  return sort(nums, sorted);
+}
+// Here's how it works:
+
+// 1 The function takes two arguments: nums, an array of integers to be sorted, and sorted, an array to hold the sorted elements.sorted is optional and defaults to an empty array.
+// 2 If the nums array is empty, we've sorted all the elements so we return the sorted array.
+// 3 Otherwise, we find the smallest element in nums by using Math.min(...nums).This returns the minimum value in the array, which we store in a variable called min.
+// 4 We add the min value to the end of the sorted array using sorted.push(min).
+// 5 We remove the min value from the nums array using nums.splice(nums.indexOf(min), 1).nums.indexOf(min) finds the index of the min value in the nums array, and splice removes one element from that index.This ensures that we don't add duplicates to the sorted array.
+// 6 We return a recursive call to sort() with the updated nums and sorted arrays.
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
   module.exports = sort;
