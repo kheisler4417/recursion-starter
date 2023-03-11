@@ -11,7 +11,28 @@ range(7, 6); // []
 ***********************************************************************/
 
 
-// your code here
+function range(start, end) {
+  const arr = []
+  if (end < start) {
+    return arr;
+  } else if (start === end) {
+    return arr;
+  } else {
+    arr.push(start)
+    return arr.concat(range(start + 1, end))
+  }
+}
+
+// function range(start, end) {
+//   if (end <= start) {
+//     return [];
+//   } else {
+//     const arr = range(start, end - 1);
+//     arr.push(end - 1);
+//     return arr;
+//   }
+// }
+
 
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/

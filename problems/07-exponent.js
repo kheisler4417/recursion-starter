@@ -1,5 +1,5 @@
 /***********************************************************************
-Write a recursive function called `exponent` that takes two integers, 
+Write a recursive function called `exponent` that takes two integers,
 `num` and `power`, and returns `num` raised to the `power`th power. Your
 function should work when `num` or `power` are positive OR negative.
 
@@ -20,10 +20,20 @@ exponent(2, -2); // 1/4 (or 0.25)
 exponent(5, 5); // 3125
 ***********************************************************************/
 
-function exponent(b, n) {
-  // your code here
+
+function exponent(num, power) {
+  if (power === 0) {
+    return 1;
+  } else if (power < 0) {
+    return exponent(1 / num, -power);
+  } else if (power % 2 === 0) {
+    const sqrt = exponent(num, power / 2);
+    return sqrt * sqrt;
+  } else {
+    return num * exponent(num, power - 1);
+  }
 }
-  
+
 /**************DO NOT MODIFY ANYTHING UNDER THIS LINE*****************/
 try {
   module.exports = exponent;
